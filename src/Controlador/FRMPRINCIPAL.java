@@ -84,6 +84,7 @@ public class FRMPRINCIPAL extends javax.swing.JFrame {
         jmIVentas = new javax.swing.JMenuItem();
         MenuPersonal = new javax.swing.JMenu();
         JmIClientes = new javax.swing.JMenuItem();
+        jMproveedores = new javax.swing.JMenuItem();
         JmIUsuarios = new javax.swing.JMenuItem();
         MenuProductos = new javax.swing.JMenu();
         JmIProductos = new javax.swing.JMenuItem();
@@ -178,7 +179,7 @@ public class FRMPRINCIPAL extends javax.swing.JFrame {
         MenuPersonal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         MenuPersonal.setOpaque(true);
 
-        JmIClientes.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
+        JmIClientes.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
         JmIClientes.setBackground(new java.awt.Color(36, 33, 33));
         JmIClientes.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         JmIClientes.setForeground(new java.awt.Color(255, 255, 255));
@@ -191,7 +192,14 @@ public class FRMPRINCIPAL extends javax.swing.JFrame {
         });
         MenuPersonal.add(JmIClientes);
 
-        JmIUsuarios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, 0));
+        jMproveedores.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
+        jMproveedores.setBackground(new java.awt.Color(36, 33, 33));
+        jMproveedores.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jMproveedores.setForeground(new java.awt.Color(255, 255, 255));
+        jMproveedores.setText("Proveedores");
+        MenuPersonal.add(jMproveedores);
+
+        JmIUsuarios.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
         JmIUsuarios.setBackground(new java.awt.Color(36, 33, 33));
         JmIUsuarios.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         JmIUsuarios.setForeground(new java.awt.Color(255, 255, 255));
@@ -922,6 +930,7 @@ public class FRMPRINCIPAL extends javax.swing.JFrame {
     public static javax.swing.JDesktopPane deskPricipal;
     javax.swing.JMenu jMIAyuda;
     public static javax.swing.JMenu jMenu5;
+    javax.swing.JMenuItem jMproveedores;
     public static javax.swing.JMenu jmIVenta;
     javax.swing.JMenuItem jmIVentas;
     public static javax.swing.JLabel lblAcceso;
