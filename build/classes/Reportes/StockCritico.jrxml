@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="539" leftMargin="28" rightMargin="28" topMargin="28" bottomMargin="28" uuid="caccee7d-9e99-4001-a03e-637b1f353303">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="184"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Arial" fontSize="26" isBold="true" pdfFontName="Helvetica-Bold"/>
+	<style name="SubTitle" forecolor="#666666" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<parameter name="stock_producto" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select cod_producto , nombre_producto,unidad_producto,precio_producto,precio_compra, stock_producto FROM producto WHERE stock_producto <= $P{stock_producto}]]>
+	</queryString>
+	<field name="cod_producto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombre_producto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="unidad_producto" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="precio_producto" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="precio_compra" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="stock_producto" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="numero_prod" class="java.lang.Long" calculation="Count">
+		<variableExpression><![CDATA[$F{cod_producto}]]></variableExpression>
+	</variable>
+	<variable name="TotalValorProd" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{precio_producto}]]></variableExpression>
+	</variable>
+	<variable name="TotalValorCompras" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{precio_compra}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="68" splitType="Stretch">
+			<staticText>
+				<reportElement style="Title" x="170" y="18" width="199" height="33" uuid="1b905185-3077-42e7-99de-c2d569570b7a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[Productos por Stock]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="35" width="555" height="1" uuid="d81e813a-5aa3-4e0a-88b3-1eef75732211"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<staticText>
+				<reportElement style="Column header" x="0" y="19" width="108" height="15" uuid="5cf156fe-75b0-4974-8379-85ec1c286408"/>
+				<box topPadding="0" leftPadding="0" bottomPadding="0" rightPadding="0"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Codigo ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="108" y="19" width="112" height="15" uuid="81b886e7-6f10-42ed-8b26-fa7b5c5611e9"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[Nombre ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="236" y="19" width="47" height="15" uuid="911d7659-9c97-45d6-8920-4a7abbfd920c"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[Unidad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="299" y="20" width="73" height="15" uuid="843176e2-2b57-4a81-bd14-2eec0143a5c7"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[Precio Venta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="384" y="19" width="83" height="15" uuid="0e6eceee-d670-4ac0-b208-114daa223dc9"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[Precio Compra]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="493" y="19" width="46" height="15" uuid="7149515c-8368-4713-bb23-33d25f7d6ee5"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<text><![CDATA[Stock]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="16" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="15" width="555" height="1" uuid="fddc4f4b-af67-4df8-ab24-3071ec4fa7e2"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+			<textField pattern="#,##0">
+				<reportElement style="Detail" x="299" y="1" width="73" height="15" uuid="0339f20f-7f65-4342-93f2-2cadb8f5ad57"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{precio_producto}.longValue()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="Detail" x="384" y="1" width="83" height="15" uuid="6b6772f3-8cc9-459e-87cf-adf4fb512c99"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{precio_compra}.doubleValue()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="Detail" x="479" y="1" width="60" height="15" uuid="c0e8f5ea-3d7e-49d7-b230-61eb306667bc"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{stock_producto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="0" y="0" width="108" height="15" uuid="5b362712-f99a-4d10-bf01-83a264c60f46"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cod_producto}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement style="Detail" x="236" y="0" width="47" height="15" uuid="73e4c3ab-5c28-45e8-bd79-9560f7d606be"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{unidad_producto}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Detail" x="108" y="1" width="112" height="15" uuid="53ca2eb4-9a88-489b-b318-5dcaf0b7d81b"/>
+				<textElement>
+					<font fontName="Times New Roman" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_producto}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="8" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement style="Column header" x="499" y="0" width="40" height="20" uuid="971457a8-bdfe-4b30-b686-1a0e008b5d92"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement style="Column header" x="0" y="0" width="197" height="20" uuid="b84ce45d-67fa-46ec-ae70-382d2aa87b69"/>
+				<textElement>
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="Column header" x="419" y="0" width="80" height="20" uuid="7709c73d-843a-4be9-89d5-48981270c2d5"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="101" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Transparent" x="181" y="26" width="102" height="20" forecolor="#666666" backcolor="#FFFFFF" uuid="1cd1e7fe-5363-4ccf-b7e9-17b0a18de0c1"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="Times New Roman" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Numero de Productos :]]></text>
+			</staticText>
+			<textField pattern="#,##0">
+				<reportElement x="283" y="26" width="100" height="20" uuid="ff488728-911a-4f04-9a65-52f820f869ff"/>
+				<textFieldExpression><![CDATA[$V{numero_prod}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="148" y="46" width="135" height="20" forecolor="#666666" backcolor="#FFFFFF" uuid="d908868b-98ee-4e24-abe7-253680866bf0"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="Times New Roman" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Valor Total Productos Ventas :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="138" y="66" width="145" height="20" forecolor="#666666" backcolor="#FFFFFF" uuid="3a140b4c-ff44-4229-927f-c4c672b0ef1f"/>
+				<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="Times New Roman" size="10" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[  Valor Total Productos Compra :]]></text>
+			</staticText>
+			<textField pattern="#,##0">
+				<reportElement x="284" y="46" width="100" height="20" uuid="acbb32f5-524a-457a-9216-a033a7e121ae"/>
+				<textFieldExpression><![CDATA[$V{TotalValorProd}.doubleValue()]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement x="284" y="66" width="100" height="20" uuid="a6db8f5d-2acf-49cb-b5c3-a35908d16e8d"/>
+				<textFieldExpression><![CDATA[$V{TotalValorCompras}.doubleValue()]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

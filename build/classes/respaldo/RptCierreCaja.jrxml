@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9c067b45-ee6b-4dfb-b7c6-0d95d7bc7da8">
+	<property name="ireport.zoom" value="2.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="502"/>
+	<parameter name="fecha_cierre" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select 
+(select nombre_persona from persona where cod_persona = a.cod_usuario_FK) as nombreCajeroA,
+ a.nombreCaja,
+ a.monto_apertura,
+ a.fecha_apertura,
+ a.hora_apertura,
+
+(select nombre_persona from persona where cod_persona = c.cod_usuario_FK) as nombreCajeroC,
+c.nombreCaja,
+c.fecha_cierre,
+c.hora_cierre,
+c.efectivo,
+c.tarjeta,
+c.credito,
+c.monto_cierre,
+c.diferencia_cierre
+
+ from apertura a  inner join cierre c on a.nombreCaja = c.nombreCaja and a.fecha_apertura = c.fecha_cierre and c.fecha_cierre = $P{fecha_cierre}]]>
+	</queryString>
+	<field name="nombreCajeroA" class="java.lang.String"/>
+	<field name="nombreCaja" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="monto_apertura" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fecha_apertura" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="hora_apertura" class="java.sql.Time">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nombreCajeroC" class="java.lang.String"/>
+	<field name="fecha_cierre" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="hora_cierre" class="java.sql.Time">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="efectivo" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tarjeta" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="credito" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="monto_cierre" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="diferencia_cierre" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="total_ventas" class="java.math.BigDecimal"/>
+	<variable name="apertVentas" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="77" splitType="Stretch">
+			<staticText>
+				<reportElement x="165" y="23" width="201" height="20" uuid="7a2e26c0-b340-4268-91dc-87b37b12d7af"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[Reporte de cierre de Caja]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="87" splitType="Stretch">
+			<staticText>
+				<reportElement x="90" y="0" width="88" height="20" uuid="c1591290-71ff-4700-84d9-bb0e2afc4d03"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<text><![CDATA[Datos de Apertura ]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="46" y="30" width="86" height="20" uuid="4e21725b-e7c5-4c40-9a96-9abcd39d0163"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_apertura}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="30" width="46" height="20" uuid="d29341b1-b7a9-4b45-82f5-c0d032a738fa"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<text><![CDATA[Fecha :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="50" width="46" height="20" uuid="b6d491c7-d54b-41b0-b9b0-6a40f417048f"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<text><![CDATA[Hora :]]></text>
+			</staticText>
+			<textField pattern="HH.mm.ss">
+				<reportElement x="46" y="50" width="86" height="20" uuid="75390a93-aae2-41e0-8743-c82888d097d2"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{hora_apertura}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="132" y="30" width="46" height="20" uuid="76530fb3-1148-4553-9be7-a250a965b889"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<text><![CDATA[Cajero :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="132" y="50" width="46" height="20" uuid="077467e8-2ac9-42e8-ba8e-becf7c6d534e"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<text><![CDATA[   Caja :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="178" y="30" width="90" height="20" uuid="00718d66-9050-45d6-9226-e143e23e22bd"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombreCajeroA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="178" y="50" width="90" height="20" uuid="46c01dc7-d0da-4512-8834-c7545bc29e70"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombreCaja}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="367" y="0" width="88" height="20" uuid="cc36fa19-3d6c-4136-b9a3-c27ad8643914"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<text><![CDATA[Datos de Cierre ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="275" y="50" width="46" height="20" uuid="01e4b8b7-7ca5-4d76-a6ed-6e550dc96a77"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<text><![CDATA[Hora :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="275" y="30" width="46" height="20" uuid="f04d0459-39dd-44bf-9415-19faf273cc35"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<text><![CDATA[Fecha :]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="321" y="30" width="88" height="20" uuid="eb40219b-f1e6-41ac-8442-9ee1a414c4f9"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fecha_cierre}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH.mm.ss">
+				<reportElement x="321" y="50" width="88" height="20" uuid="8537fae2-9c9f-40a3-9255-d99f09a37d8e"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{hora_cierre}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="409" y="30" width="46" height="20" uuid="d4a55a2c-d8e7-456a-88b0-65ce430bf277"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<text><![CDATA[Cajero :]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="455" y="30" width="100" height="20" uuid="0159bea1-97ae-4f99-a600-542473c6b299"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombreCajeroC}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="39" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="19" width="60" height="20" uuid="9fd3d34c-60fc-49e1-812c-0723bf845bd7"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<text><![CDATA[ Efectivo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="60" y="19" width="60" height="20" uuid="a8029e5c-9b63-4b90-a459-ae8fd88216f9"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<text><![CDATA[Tarjeta]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="120" y="19" width="60" height="20" uuid="43273ba8-2d22-4698-acfc-78a629cdf445"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<text><![CDATA[Credito]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="395" y="19" width="90" height="20" uuid="3e1b533b-8af3-4198-89bf-2044b3c2c977"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<text><![CDATA[Dinero Fisico en Caja]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="490" y="19" width="65" height="20" uuid="b9c67ac6-6d82-4cd7-a907-1d1d6b69102d"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<text><![CDATA[Diferencia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="181" y="19" width="65" height="20" uuid="1f877a6b-4f0b-406f-a1b1-24b59d668fee"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<text><![CDATA[Monto Apertura]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="256" y="19" width="65" height="20" uuid="6f797838-5a73-4c23-ae61-9392024447e0"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<text><![CDATA[Total Ventas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="321" y="19" width="70" height="20" uuid="34cf62b3-566e-46a4-a6b5-787090e1e325"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<text><![CDATA[Total en Sistema]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="60" height="20" uuid="d0071454-9613-47bd-89ba-5ac38863a5dc"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{efectivo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="61" y="0" width="60" height="20" uuid="659cce84-fd66-4f7a-94c4-4647d023055a"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tarjeta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="121" y="0" width="60" height="20" uuid="67360ad3-6c50-43d1-b9f9-528bb13a6562"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{credito}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="395" y="0" width="90" height="20" uuid="f98b2d43-2065-4e70-ac11-66974688de88"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{monto_cierre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="490" y="0" width="65" height="20" uuid="63e329bc-11a0-4ad2-a997-8bfead49adda"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{diferencia_cierre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="181" y="0" width="65" height="20" uuid="7899fcc4-6826-4b7e-8c32-34aabfc0913f"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{monto_apertura}.doubleValue()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="256" y="0" width="65" height="20" uuid="66275718-98fa-4c58-a99e-0e1c44d77361"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{efectivo}.doubleValue()+$F{tarjeta}.doubleValue()+$F{credito}.doubleValue()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="321" y="0" width="70" height="20" uuid="4c9d714b-0ca2-4f66-a383-17b2005d6d00"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{efectivo}.doubleValue()+$F{tarjeta}.doubleValue()+$F{credito}.doubleValue()+$F{monto_apertura}.doubleValue()]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="34" width="100" height="20" uuid="e3305713-de7c-4b64-bcec-ce08ac065477"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="445" y="34" width="70" height="20" uuid="5ed999e4-e542-4afe-820b-4831d3c3d337"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="515" y="34" width="40" height="20" uuid="b15b9933-5ff9-4d06-8a60-5bbfa611be2a"/>
+				<textElement>
+					<font fontName="Times New Roman"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
