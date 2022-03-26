@@ -62,7 +62,7 @@ public class FRMPRINCIPAL extends javax.swing.JFrame {
         try {
             form.setMaximum(true);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "ERROR ");
+            JOptionPane.showMessageDialog(null, "ERRORasx ");
         }
 
         form.toFront();
